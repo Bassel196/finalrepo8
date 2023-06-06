@@ -83,6 +83,8 @@ module.exports = {
             return res.status(500).json(err)
         }
     },
+
+
     shipOrder: async (req, res) => {
         try {
             const orderId = req.params.id
@@ -100,6 +102,7 @@ module.exports = {
         }
 
     },
+
     outForDelivery: async (req, res) => {
         try {
             const orderId = req.params.id
@@ -117,6 +120,7 @@ module.exports = {
         }
 
     },
+
     deliverPackage: async (req, res) => {
         try {
             const orderId = req.params.id
@@ -133,6 +137,7 @@ module.exports = {
         }
 
     },
+
     cancelOrder: async (req, res) => {
         try {
             const orderId = req.params.id
@@ -142,7 +147,9 @@ module.exports = {
                 //updating stock for each items in order before cancelling 
                 myOrder.products.forEach(async product => {
                     let myProduct = await Product.findById(product.productId)
-                    myProduct.quantity += product.quantity
+                    if (myProduct !== null) {
+                        myProduct.quantity += product.quantity;
+                    }
                     await myProduct.save()
                 })
                 myOrder.status = "Cancelled"
