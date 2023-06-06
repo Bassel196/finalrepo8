@@ -148,6 +148,13 @@ module.exports = {
         state: req.body.state,
         pincode: req.body.pincode,
         phone: req.body.phone,
-      });
+      });   
+       await myUser.save();
+      res.status(201).json({ message: "new address created" });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ err });
+    }
+  },
 
 };
