@@ -46,3 +46,17 @@ module.exports = {
             return res.status(500).json({ err })
         }
     },
+    wishlistItemCount: async (req, res, next) => {
+        const userId = req.user.id
+        try {
+            const wishlist = await Wishlist.findOne({ userId })
+            let itemCount = (wishlist?.myList) ? (wishlist.myList.length) : 0
+            res.locals.wishlistItemCount = itemCount
+            return res.status(200).json({ itemCount: itemCount })
+
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ err })
+        }
+    }
+}
