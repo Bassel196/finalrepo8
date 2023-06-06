@@ -139,4 +139,32 @@ module.exports = {
             return res.status(400).json({ err })
         }
     },
+
+    getCheckout: async (req, res) => {
+        try {
+            const userId = req.user.id
+            const allCategories = await Category.find();
+            //getting coupon from session
+            const couponDiscount = req.session.coupon?.discount
+            const couponCode = req.session.coupon?.code
+            const user = await User.findById(userId, { email: 1, address: 1 })
+            const findCart = await Cart.findOne({ userId: userId }).populate({
+                path: "products.productId",
+                model: "Product"
+            })
+            if (findCart?.products.length > 0) {
+                res.render("master/checkout", {
+                    allCategories:allCategories,
+                    findCart: findCart,
+                    user: user,
+                    couponCode: couponCode,
+                    couponDiscount: couponDiscount
+                })
+            } else {
+                res.redirect("/user/cart")
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    },
 }
