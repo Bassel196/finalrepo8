@@ -92,4 +92,23 @@ module.exports = {
             console.log(err)
         }
     },
+    
+    cartItemCount: async (req, res, next) => {
+        const userId = req.user.id
+        try {
+            let itemCount = 0
+            const cart = await Cart.findOne({ userId })
+            if (cart) {
+                cart.products.forEach(product => {
+                    itemCount += product.quantity
+                })
+            }
+            res.locals.cartItemCount = itemCount
+            return res.status(200).json({ itemCount: itemCount })
+
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ err })
+        }
+    },
 }
