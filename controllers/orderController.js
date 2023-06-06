@@ -100,3 +100,20 @@ module.exports = {
         }
 
     },
+    outForDelivery: async (req, res) => {
+        try {
+            const orderId = req.params.id
+            const myOrder = await Order.findById(orderId)
+            if (myOrder.status != "Cancelled") {
+                myOrder.status = "Out for delivery"
+                await myOrder.save()
+                return res.status(201).json({ message: "out for delivery" })
+            } else {
+                return res.status(400).json({ message: "cant update status, Item is cancelled" })
+            }
+
+        } catch (err) {
+            return res.status(500).json(err)
+        }
+
+    },
