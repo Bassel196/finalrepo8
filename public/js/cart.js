@@ -81,7 +81,7 @@ async function addToCart(productId, productName, productPrice, quantity, offerPr
                 let itemCount = Number($(".cart-item-count").html())
                 itemCount += Number.parseInt(quantity)
                 $(".cart-item-count").html(itemCount)
-                $(`#item-${productId}`).html('₹' + response.data.itemTotal)
+                $(`#item-${productId}`).html('EGP' + response.data.itemTotal)
                 $("#checkoutBox").load(location.href + " #checkoutBox>*", "");
             }
         }
