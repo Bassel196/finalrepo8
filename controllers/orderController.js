@@ -133,3 +133,28 @@ module.exports = {
         }
 
     },
+    cancelOrder: async (req, res) => {
+        try {
+            const orderId = req.params.id
+            const myOrder = await Order.findById(orderId)
+
+            if (myOrder.status != "Cancelled" && myOrder.status != "Delivered") {
+                //updating stock for each items in order before cancelling 
+                myOrder.products.forEach(async product => {
+                    let myProduct = await Product.findById(product.productId)
+                    myProduct.quantity += product.quantity
+                    await myProduct.save()
+                })
+                myOrder.status = "Cancelled"
+                await myOrder.save()
+                return res.status(201).json({ message: "order cancelled and stock updated" })
+            } else {
+                return res.status(400).json({ message: "cant update status, Item already cancelled" })
+            }
+
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json(err)
+        }
+    },
+}
