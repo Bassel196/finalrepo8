@@ -50,4 +50,21 @@ module.exports = {
     });
   },
 
+  changePassword: (req, res) => {
+    const oldPassword = req.body.oldPassword;
+    const newPassword = req.body.password;
+    const confirmedPassword = req.body.confirmedPassword;
+    const user = req.user;
+    if (newPassword === confirmedPassword) {
+      user.changePassword(oldPassword, newPassword, function (err) {
+        if (err) {
+          res.status(401).json({ message: "wrong credential" });
+        } else {
+          res.status(201).json({ message: "password changed" });
+        }
+      });
+    } else {
+      res.status(403).json({ message: "password doesn't match" });
+    }
+  },
 };
