@@ -67,4 +67,22 @@ module.exports = {
       res.status(403).json({ message: "password doesn't match" });
     }
   },
+
+  setPassword: async (req, res) => {
+    const { password, confirmedPassword } = req.body;
+    const user = req.user;
+    try {
+      if (password === confirmedPassword) {
+        await user.setPassword(password);
+        await User.findByIdAndUpdate(req.user.id, { havePassword: true });
+        await user.save();
+        res.status(201).json({ message: "password changed" });
+      } else {
+        res.status(403).json({ message: "password doesn't match" });
+      }
+    } catch (err) {
+      res.status(401).json({ message: "Error setting Password" });
+      console.log(err);
+    }
+  },
 };
