@@ -69,4 +69,27 @@ module.exports = {
         }
     },
 
+    getCart: async (req, res) => {
+        const allCategories = await Category.find();
+        const userId = req.user.id
+        try {
+            const errorMessage = req.flash("message")
+            const findCart = await Cart.findOne({ userId: userId }).populate({
+                path: "products.productId",
+                model: "Product"
+            })
+            const couponCode = req.session.coupon?.code
+            const couponDiscount = Number(req.session.coupon?.discount)
+            res.render("master/cart", {
+                allCategories:allCategories,
+                findCart: findCart,
+                errorMessage: errorMessage,
+                couponCode: couponCode,
+                couponDiscount: couponDiscount
+
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    },
 }
