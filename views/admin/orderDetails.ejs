@@ -41,9 +41,9 @@
                   </td>
                   <td>x<%= product.quantity %></td>
                   <% if(product.offerPrice){%>
-                  <td class="text-end"> <del class="text-muted mx-1"> ₹<%= product.price %></del> ₹<%= product.offerPrice %></td>
+                  <td class="text-end"> <del class="text-muted mx-1"> EGP %= product.price %></del> EGP <%= product.offerPrice %></td>
                   <%}else{%>
-                  <td class="text-end">₹<%= product.price %> </td>
+                  <td class="text-end">EGP <%= product.price %> </td>
                   <%} %>
                 </tr>
                 <% }) %>
@@ -51,26 +51,26 @@
               <tfoot>
                 <tr>
                   <td colspan="2">Subtotal</td>
-                  <td class="text-end">₹<%= myOrder.subTotal.toFixed(2) %></td>
+                  <td class="text-end">EGP <%= myOrder.subTotal.toFixed(2) %></td>
                 </tr>
                 <tr>
                   <td colspan="2">Shipping <i class="fa-solid fa-truck"></i> </td>
-                  <td class="text-end">₹0.0</td>
+                  <td class="text-end">EGP 0.0</td>
                 </tr>
                 <tr>
                   <td colspan="2">Discount</td>
                   <% let discount = myOrder.coupon.discount ? myOrder.subTotal-myOrder.total-myOrder.coupon.discount: myOrder.subTotal-myOrder.total %>
-                  <td class="text-danger text-end">-₹<%=discount.toFixed(2) %></td>
+                  <td class="text-danger text-end">-EGP <%=discount.toFixed(2) %></td>
                 </tr>
                 <% if(myOrder.coupon.discount){%>
                 <tr>
                   <td colspan="2">Coupon (Code: <i class="fa-solid fa-tags"></i> <%= myOrder.coupon.code %>)</td>
-                  <td class="text-danger text-end">-₹<%= myOrder.coupon.discount %></td>
+                  <td class="text-danger text-end">-EGP<%= myOrder.coupon.discount %></td>
                 </tr>
                 <% } %>
                 <tr class="fw-bold">
                   <td colspan="2">TOTAL</td>
-                  <td class="text-end">₹<%= myOrder.total.toFixed(2) %></td>
+                  <td class="text-end">EGP <%= myOrder.total.toFixed(2) %></td>
                 </tr>
               </tfoot>
             </table>
@@ -83,7 +83,7 @@
               <div class="col-lg-6">
                 <h3 class="h6">Payment Method</h3>
                 <p><%= myOrder.paymentType %> <br>
-                  Total: ₹<%= myOrder.total.toFixed(2) %> </p>
+                  Total: EGP <%= myOrder.total.toFixed(2) %> </p>
               </div>
               <div class="col-lg-6">
                 <h3 class="h6"><i class="fa-solid fa-location-dot"></i> Billing address</h3>

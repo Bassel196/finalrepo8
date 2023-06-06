@@ -82,17 +82,17 @@
                 <tr>
                   <td colspan="2">Discount</td>
                   <% let discount = myOrder.coupon.discount ? myOrder.subTotal-myOrder.total-myOrder.coupon.discount: myOrder.subTotal-myOrder.total %>
-                  <td class="text-danger text-right">-₹<%=discount.toFixed(2) %></td>
+                  <td class="text-danger text-right">-EGP <%=discount.toFixed(2) %></td>
                 </tr>
                 <% if(myOrder.coupon.discount){%>
                 <tr>
                   <td colspan="2">Coupon (Code: <i class="fa-solid fa-tags"></i> <%= myOrder.coupon.code %>)</td>
-                  <td class="text-danger text-right">-₹<%= myOrder.coupon.discount %></td>
+                  <td class="text-danger text-right">-EGP<%= myOrder.coupon.discount %></td>
                 </tr>
                 <% } %>
                 <tr class="font-weight-bold">
                   <td colspan="2">TOTAL</td>
-                  <td class="text-right">₹<%= myOrder.total.toFixed(2) %></td>
+                  <td class="text-right">EGP<%= myOrder.total.toFixed(2) %></td>
                 </tr>
               </tfoot>
             </table>

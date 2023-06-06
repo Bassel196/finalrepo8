@@ -57,7 +57,7 @@ module.exports = {
                 await user.save()
             }
 
-            await cart.remove()
+            await cart.deleteOne()
             await newOrder.save()
             res.sendStatus(201)
 
