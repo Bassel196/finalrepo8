@@ -135,4 +135,19 @@ module.exports = {
     }
   },
 
+  createAddress: async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const myUser = await User.findById(userId);
+      myUser.address.unshift({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        house: req.body.house,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        pincode: req.body.pincode,
+        phone: req.body.phone,
+      });
+
 };
