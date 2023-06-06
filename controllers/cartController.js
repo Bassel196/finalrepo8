@@ -92,7 +92,7 @@ module.exports = {
             console.log(err)
         }
     },
-    
+
     cartItemCount: async (req, res, next) => {
         const userId = req.user.id
         try {
@@ -109,6 +109,34 @@ module.exports = {
         } catch (err) {
             console.log(err)
             return res.status(500).json({ err })
+        }
+    },
+
+    deleteItem: async (req, res, next) => {
+        const userId = req.user.id
+        const productId = req.params.id
+        const cartCount = req.body.cartCount
+        try {
+            const findProduct = await Product.findById(productId)
+            findProduct.quantity += cartCount
+            const cart = await Cart.findOne({ userId })
+            const itemIndex = cart.products.findIndex(product => product.productId == productId);
+            cart.products.splice(itemIndex, 1)
+            cart.subTotal = cart.products.reduce((acc, curr) => {
+                return acc + curr.quantity * curr.price;
+            }, 0)
+            cart.total = cart.products.reduce((acc, curr) => {
+                return acc + curr.quantity * (curr.offerPrice || curr.price);
+            }, 0)
+            //removing coupon from session if exist
+            req.session.coupon = null
+            await cart.save()
+            await findProduct.save()
+            return res.status(200).json({
+                message: "successfully deleted",
+            })
+        } catch (err) {
+            return res.status(400).json({ err })
         }
     },
 }
