@@ -83,3 +83,20 @@ module.exports = {
             return res.status(500).json(err)
         }
     },
+    shipOrder: async (req, res) => {
+        try {
+            const orderId = req.params.id
+            const myOrder = await Order.findById(orderId)
+            if (myOrder.status != "Cancelled") {
+                myOrder.status = "Shipped"
+                await myOrder.save()
+                return res.status(201).json({ message: "order shipped" })
+            } else {
+                return res.status(400).json({ message: "cant update status, Item is cancelled" })
+            }
+
+        } catch (err) {
+            return res.status(500).json(err)
+        }
+
+    },
