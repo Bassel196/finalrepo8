@@ -33,4 +33,10 @@ module.exports = {
       res.redirect("/register");
     }
   },
+
+  userLogin: passport.authenticate("local", {
+    failureFlash: true,
+    keepSessionInfo: true,
+    failureRedirect: "/login",
+  }),
 };
