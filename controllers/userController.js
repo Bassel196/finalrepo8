@@ -39,4 +39,15 @@ module.exports = {
     keepSessionInfo: true,
     failureRedirect: "/login",
   }),
+
+  userLogout: (req, res) => {
+    req.logout(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/");
+      }
+    });
+  },
+
 };
