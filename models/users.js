@@ -46,19 +46,6 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       required: true,
     },
-    userImagePath: [String],
-    facebook: {
-      id: String,
-      token: String,
-      email: String,
-      name: String,
-    },
-    google: {
-      id: String,
-      token: String,
-      email: String,
-      name: String,
-    },
     havePassword: {
       type: Boolean,
       default: true,
@@ -101,21 +88,10 @@ const userSchema = new mongoose.Schema(
 userSchema.plugin(passportLocalMongoose, {
   usernameField: "email",
   findByUsername: function (model, queryParameters) {
-    // Add additional query parameter - AND condition - active: true
+    // add query parameter - and condition - active: true
     queryParameters.isActive = true;
     return model.findOne(queryParameters)
   },
-})
-
-userSchema.pre('save', async (next)=>{
-  try {
-      const salt = await bcrypt.genSalt(10)
-      const hashedPassword = await bcrypt.hash(this.password,salt)
-      this.password = hashedPassword
-      next()
-  } catch (error) {
-      next(error)
-  }
 })
 
 

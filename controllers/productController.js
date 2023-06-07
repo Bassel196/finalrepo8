@@ -71,7 +71,6 @@ module.exports = {
         try {
             const product = await Product.findById(req.params.id)
             const productImages = product.productImagePath
-            // await product.remove()
             await product.deleteOne();
             productImages.forEach(async (image) => {
                 await fs.unlink("./public/files/" + image)

@@ -41,10 +41,10 @@ module.exports = {
                 paymentType: paymentType
             })
            
-            if (paymentType == "razorpay") {
-                newOrder.razorpayOrderId = req.body.orderId
-                newOrder.razorpayPaymentId = req.body.paymentId
-            }
+            // if (paymentType == "razorpay") {
+            //     newOrder.razorpayOrderId = req.body.orderId
+            //     newOrder.razorpayPaymentId = req.body.paymentId
+            // }
 
             //adding coupon details if applied
             if (req.session.coupon) {

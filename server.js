@@ -55,8 +55,7 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//facebook and google oAuth
-oAuth();
+
 
 app.use(function (req, res, next) {
   if (req.isAuthenticated()) {
@@ -78,5 +77,5 @@ app.use(function (req, res, next) {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => console.log("server is up and running on port" + PORT));
