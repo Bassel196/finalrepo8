@@ -8,6 +8,7 @@ const shopControl = require("../controllers/shopController");
 const authentication = require("../middleware/authentication");
 const { otpVerification, getOtpForm, sendOtp } = require("../middleware/otp");
 
+
 router.get(
   "/",
   authentication.checkAccountVerifiedInIndex,
