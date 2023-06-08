@@ -6,7 +6,7 @@ const Category = require("../models/category");
 const userControl = require("../controllers/userController");
 const shopControl = require("../controllers/shopController");
 const authentication = require("../middleware/authentication");
-const { otpVerification, getOtpForm, sendOtp } = require("../middleware/otp");
+
 
 
 router.get(
@@ -102,15 +102,9 @@ router.get("/error", (req, res) => {
 });
 
 router.post("/autoFill", shopControl.autoFill);
-// router.post("/validateOtp", otpVerification);
 router.post("/forgetPassword", shopControl.forgetPassword);
 router.post("/resetPassword", userControl.resetPassword);
 
-// router.post("/resendOtp", async (req, res) => {
-//   getOtpForm(req, res);
-//   await sendOtp(req, res);
-//   req.flash("message", "Otp resend successful");
-// });
 router.post("/login", userControl.userLogin, (req, res) => {
   if (req.user.isAdmin === true) {
     res.redirect("/admin");
