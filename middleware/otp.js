@@ -9,28 +9,3 @@ function generateOtp() {
   return otp;
 }
 
-
-function hideEmail(target) {
-  let email = target;
-  let hiddenEmail = "";
-  for (i = 0; i < email.length; i++) {
-    if (i > 2 && i < email.indexOf("@")) {
-      hiddenEmail += "*";
-    } else {
-      hiddenEmail += email[i];
-    }
-  }
-  return hiddenEmail;
-}
-
-let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 456,
-  secure: true,
-  service: "Gmail",
-
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
