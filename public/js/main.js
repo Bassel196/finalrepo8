@@ -173,12 +173,12 @@ $(".humberger__menu__overlay").on('click', function () {
         max: maxPrice,
         values: [minPrice, maxPrice],
         slide: function (event, ui) {
-            minamount.val('₹' + ui.values[0]);
-            maxamount.val('₹' + ui.values[1]);
+            minamount.val('EGP' + ui.values[0]);
+            maxamount.val('EGP' + ui.values[1]);
         }
     });
-    minamount.val('₹' + rangeSlider.slider("values", 0));
-    maxamount.val('₹' + rangeSlider.slider("values", 1));
+    minamount.val('EGP' + rangeSlider.slider("values", 0));
+    maxamount.val('EGP' + rangeSlider.slider("values", 1));
 
     /*--------------------------
         Select
@@ -203,8 +203,7 @@ $(".humberger__menu__overlay").on('click', function () {
 		Quantity change
 	--------------------- */
     var proQty = $('.pro-qty');
-    // proQty.prepend('<span class="dec qtybtn">-</span>');
-    // proQty.append('<span class="inc qtybtn">+</span>');
+ 
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
