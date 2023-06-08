@@ -3,7 +3,6 @@ const express = require("express");
 const expressLayout = require("express-ejs-layouts");
 const dbConfig = require("./config/dbConfig");
 const passport = require("passport");
-const oAuth = require("./auth/passport");
 const session = require("express-session");
 const flash = require("connect-flash");
 const methodOverride = require("method-override");
