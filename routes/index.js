@@ -103,7 +103,7 @@ router.get("/error", (req, res) => {
 
 router.post("/autoFill", shopControl.autoFill);
 router.post("/forgetPassword", shopControl.forgetPassword);
-router.post("/resetPassword", userControl.resetPassword);
+
 
 router.post("/login", userControl.userLogin, (req, res) => {
   if (req.user.isAdmin === true) {
