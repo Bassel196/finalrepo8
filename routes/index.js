@@ -62,46 +62,6 @@ router.get("/register", authentication.checkLoggedOut, async (req, res) => {
   });
 });
 
-// router.get(
-//   "/auth/google",
-//   authentication.checkLoggedOut,
-//   passport.authenticate("google")
-// );
-
-// router.get(
-//   "/auth/google/myStyle",
-//   authentication.checkLoggedOut,
-//   passport.authenticate("google", { failureRedirect: "/login" }),
-//   function (req, res) {
-//     // Successful authentication, redirect home.
-//     if (req.user.isAdmin === true) {
-//       res.redirect("/admin");
-//     } else {
-//       res.redirect("/");
-//     }
-//   }
-// );
-
-// router.get(
-//   "/auth/facebook",
-//   authentication.checkLoggedOut,
-//   passport.authenticate("facebook", { scope: ["email"] })
-// );
-
-// router.get(
-//   "/auth/facebook/myStyle",
-//   authentication.checkLoggedOut,
-//   passport.authenticate("facebook", { failureRedirect: "/login" }),
-//   function (req, res) {
-//     // Successful authentication, redirect home.
-//     if (req.user.isAdmin === true) {
-//       res.redirect("/admin");
-//     } else {
-//       res.redirect("/");
-//     }
-//   }
-// );
-
 router.get(
   "/forgetPassword",
   authentication.checkLoggedOut,
