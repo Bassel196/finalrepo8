@@ -27,7 +27,7 @@ module.exports = {
             next()
         }
         else {
-            return getOtpForm(req, res)
+            res.console.log(err)
         }
     },
 
@@ -37,7 +37,7 @@ module.exports = {
                 next()
             }
             else {
-                return getOtpForm(req, res)
+                res.console.log(err)
             }
         } else {
             next()

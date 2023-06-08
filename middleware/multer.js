@@ -12,6 +12,7 @@ const multerStorage = multer.diskStorage({
 
 const multerFilter = (req, file, cb) => {
     if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/webp" || file.mimetype == "image/gif") {
+        //callback fun 
         cb(null, true);
     } else {
         return cb(new Error("File not supported"), false);
