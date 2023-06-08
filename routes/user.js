@@ -5,7 +5,6 @@ const wishlistControl = require("../controllers/wishlistController")
 const cartControl = require("../controllers/cartController")
 const shopControl = require("../controllers/shopController")
 const orderControl =require("../controllers/orderController")
-const paymentControl = require("../controllers/paymentController")
 const couponControl = require("../controllers/couponController")
 const router = express.Router()
 
@@ -21,9 +20,6 @@ router.get("/cartItemCount",cartControl.cartItemCount)
 router.get("/wishlistItemCount",wishlistControl.wishlistItemCount)
 
 router.post("/createAddress",userControl.createAddress)
-router.post("/payment/orderId",paymentControl.generateOrder)
-router.post("/payment/verify/:orderId",paymentControl.verifyPayment)
-router.post("/payment/:id/refund",paymentControl.refund)
 router.post("/checkout", orderControl.checkout)
 router.post("/redeem/:id",couponControl.redeem)
 
